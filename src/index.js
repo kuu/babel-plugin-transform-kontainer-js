@@ -30,7 +30,14 @@ export default function ({ types: t, template }) {
           }
 
           attrs.forEach((attr) => {
-            props[attr.name.name] = parseValue(attr.value);
+            if (t.isJSXAttribute(attr)) {
+              props[attr.name.name] = parseValue(attr.value);
+            } else if (t.isJSXSpreadAttribute(attr)) {
+              const arr = attr.argument.properties;
+              arr.forEach(item => {
+              	props[item.key.name] = parseValue(item.value);
+              });
+            }
           });
 
           stack.push({name, props, children});
