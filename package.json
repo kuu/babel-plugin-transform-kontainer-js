@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-kontainer-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Compile JSX to kontainer-js API calls",
   "main": "lib/index.js",
   "scripts": {
