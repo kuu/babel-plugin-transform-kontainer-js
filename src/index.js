@@ -52,7 +52,7 @@ export default function ({ types: t, template }) {
                 return t.objectProperty(t.stringLiteral(key), elem.props[key]);
               })
             ),
-            CHILDREN: elem.children.length === 0 ? t.nullLiteral() : t.sequenceExpression(elem.children)
+            CHILDREN: elem.children.length === 0 ? t.nullLiteral() : t.arrayExpression(elem.children)
           }).expression;
 
           const parent = stack.pop();

@@ -1,48 +1,39 @@
 function render() {
   return (
-    <file>
-      <ftyp majorBrand="isom" />
-      <moov>
-        <mvhd creationTime={new Date(0)} modificationTime={new Date(0)} timeScale={1} nextTrackId={4} />
-        <trak>
-          <tkhd creationTime={new Date(0)} modificationTime={new Date(0)} trackId={1} width={640} height={480} />
-          <mdia>
-            <mdhd creationTime={new Date(0)} modificationTime={new Date(0)} timeScale={1} />
-            <hdlr handlerType="video" name="avc" />
-            <minf>
-              <vmhd />
-              <dinf>
-                <dref entryCount={2}>
-                  <url location="/data" />
-                  <urn location="/data" name="/name" />
-                </dref>
-              </dinf>
-              <stbl>
-                <stsd entryCount={1}>
-                  <avc1 dataReferenceIndex={1} width={1280} height={720}>
-                    <avcC
-                      avcProfileIndication="baseline"
-                      profileCompatibility={{
-                        constraintSet0Flag: false,
-                        constraintSet1Flag: false,
-                        constraintSet2Flag: false
-                      }}
-                      avcLevelIndication={1.3}
-                      lengthSize={1} />
-                  </avc1>
-                </stsd>
-                <stts
-                   entries={[
-                     {sampleCount: 14, sampleDelta: 10}
-                   ]} />
-                <stsz sampleSize={5} />
-                <stsc />
-                <stco />
-              </stbl>
-            </minf>
-          </mdia>
-        </trak>
-      </moov>
-    </file>
+    <trak>
+      <tkhd {...{trackId, duration: 0, width: track.settings.width, height: track.settings.height}} />
+      <mdia>
+        <mdhd {...{timeScale: metadata.timeScale, duration: 0}} />
+        <hdlr {...{handlerType: 'video', name: 'VideoHandler'}} />
+        <minf>
+          <vmhd />
+          <dinf>
+            <dref entryCount={1}>
+              <url location='' />
+            </dref>
+          </dinf>
+          <stbl>
+            <stsd entryCount={1}>
+              <avcC {...{
+                avcProfileIndication: 'baseline',
+                profileCompatibility: {
+                  constraintSet0Flag: false,
+                  constraintSet1Flag: false,
+                  constraintSet2Flag: false
+                },
+                avcLevelIndication: 3,
+                lengthSize: 4,
+                sequenceParameterSets: [{data: metadata.sps, length: metadata.sps.length}],
+                pictureParameterSets: [{data: metadata.pps, length: metadata.pps.length}]
+              }} />
+            </stsd>
+            <stts entries={[]} />
+            <stsc />
+            <stsz />
+            <stco />
+          </stbl>
+        </minf>
+      </mdia>
+    </trak>
   );
 }
