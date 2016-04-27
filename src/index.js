@@ -1,6 +1,6 @@
 export default function ({ types: t, template }) {
   const buildIsoBmff = template(`
-    IsoBmff.createElement(BOX_NAME, PROP_OBJ, CHILDREN)
+    Kontainer.createElement(BOX_NAME, PROP_OBJ, CHILDREN)
   `);
 
   const parseValue = (val) => {
